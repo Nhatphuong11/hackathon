@@ -4,81 +4,31 @@ import ra.bussiness.IBook;
 
 import java.util.Scanner;
 
-public class Book implements IBook {
-    public static int nextId = 1;
+import static ra.run.Main.sc;
+
+public class Book implements IBook{
     private int bookId;
     private String bookName;
-    private int numberOfPages;
     private String title;
-    private double importPrice;
-    private double exportPrice ;
+    private int numberOfPages;
+    private float importPrice;
+    private float exportPrice ;
     private float interest;
-    private boolean bookStatus = true ;
+    private boolean bookStatus;
+
     public Book() {
-        this.bookId = nextId++;
     }
 
-    public Book( String bookName, String title, double importPrice, double exportPrice, float interest, boolean bookStatus) {
+    public Book(int bookId, String bookName, String title, int numberOfPages, float importPrice, float exportPrice, float interest, boolean bookStatus) {
+        this.bookId = bookId;
         this.bookName = bookName;
         this.title = title;
+        this.numberOfPages = numberOfPages;
         this.importPrice = importPrice;
         this.exportPrice = exportPrice;
         this.interest = interest;
         this.bookStatus = bookStatus;
-    }
 
-    public static void remove(Book bookToDelete) {
-    }
-
-
-    public int getBookId() {
-        return bookId;
-    }
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-    public String getBookName() {
-        return bookName;
-    }
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    public double getImportPrice() {
-        return importPrice;
-    }
-    public void setImportPrice(double importPrice) {
-        this.importPrice = importPrice;
-    }
-    public double getExportPrice() {
-        return exportPrice;
-    }
-    public void setExportPrice(double exportPrice) {
-        this.exportPrice = exportPrice;
-    }
-    public float getInterest() {
-        return interest;
-    }
-
-    public boolean isBookStatus() {
-        return bookStatus;
-    }
-    public void setBookStatus(boolean bookStatus) {
-        this.bookStatus = bookStatus;
-    }
-    public void calculateInterest() {
-        this.interest = (float) (this.exportPrice - this.importPrice);
-    }
-
-    @Override
-    public void displayData() {
-        System.out.printf("Mã sách: %d - Tên sách: %s - Tiêu đề: %s - Sô trang sách: %d\n", this.bookId, this.bookName, this.title, this.numberOfPages);
-        System.out.printf("Giá nhập: %f - Giá bán: %f - Lợi nhuận: %f - Trạng thái: %b\n", this.importPrice, this.exportPrice, this.interest, this.bookStatus);
     }
 
     @Override
@@ -96,23 +46,87 @@ public class Book implements IBook {
         this.numberOfPages = Integer.parseInt(sc.nextLine());
 
         System.out.println("Giá nhâp");
-        this.importPrice = Double.parseDouble(sc.nextLine());
+        this.importPrice = Float.parseFloat(sc.nextLine());
 
         System.out.println("Giá bán");
-        this.exportPrice = Double.parseDouble(sc.nextLine());
+        this.exportPrice = Float.parseFloat(sc.nextLine());
+
+        this.interest = this.exportPrice - this.importPrice;
 
         System.out.println("Nhập trạng thái");
-        String isActive = sc.nextLine();
-        if (isActive.equals("con hang")) {
-            bookStatus = true;
-        } else if (isActive.equals("het hang")) {
-            bookStatus= false;
-        } else {
-            bookStatus = false;
-        }
-
-
+        this.bookStatus = Boolean.parseBoolean(sc.nextLine());
     }
 
-}
+    @Override
+    public void displayData() {
+        System.out.printf("Mã sách: %d - Tên sách: %s - Tiêu đề: %s - Số trang sách: %d\n", this.bookId, this.bookName, this.title, this.numberOfPages);
+        System.out.printf("Giá nhập: %f - Giá bán: %f - Lợi nhuận: %f - Trạng thái: %s\n", this.importPrice, this.exportPrice, this.interest, this.bookStatus ? "còn hàng" : "Hết hàng");
+    }
 
+
+
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public float getImportPrice() {
+        return importPrice;
+    }
+
+    public void setImportPrice(float importPrice) {
+        this.importPrice = importPrice;
+    }
+
+    public float getExportPrice() {
+        return exportPrice;
+    }
+
+    public void setExportPrice(float exportPrice) {
+        this.exportPrice = exportPrice;
+    }
+
+    public float getInterest() {
+        return interest;
+    }
+
+    public void setInterest(float interest) {
+        this.interest = this.exportPrice - this.exportPrice;
+    }
+
+    public boolean isBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(boolean bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+}

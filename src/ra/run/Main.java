@@ -65,20 +65,21 @@ public class Main {
         }
     }
     public static void delete(){
-        System.out.print("Nhập mã sách muốn xóa: ");
-        int bookIdToDelete = Integer.parseInt(sc.nextLine());
-        Book bookToDelete = new Book();
-        for (Book book : bookList) {
-            if (book.getBookId() == bookIdToDelete) {
-                bookToDelete = book;
+        System.out.println("Nhập mã sách cần xoá");
+        int deleteId = Integer.parseInt(sc.nextLine());
+        boolean check = false;
+        Book deleteBook = new Book();
+        for (Book element : bookList) {
+            if(element.getBookId() == deleteId){
+                deleteBook = element;
+                check = true;
                 break;
             }
         }
-        if (bookToDelete != null) {
-            Book.remove(bookToDelete);
-            System.out.println("Sách đã được xóa thành công!");
-        } else {
-            System.err.println("Không tìm thấy mã sách vừa nhập!");
+        if(check){
+            bookList.remove(deleteBook);
+        }else {
+            System.out.println("Mã sách cần xoá không tìm thấy");
         }
     }
     public static void sortDownInterest() {
