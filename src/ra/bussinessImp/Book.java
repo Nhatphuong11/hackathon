@@ -31,41 +31,6 @@ public class Book implements IBook{
 
     }
 
-    @Override
-    public void inputData(Scanner sc) {
-        System.out.println("Nhập vào mã sách");
-        this.bookId = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Nhập tên sách");
-        this.bookName = sc.nextLine();
-
-        System.out.println("Nhập tiêu đề");
-        this.title = sc.nextLine();
-
-        System.out.println("Nhập số trang sách");
-        this.numberOfPages = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Giá nhâp");
-        this.importPrice = Float.parseFloat(sc.nextLine());
-
-        System.out.println("Giá bán");
-        this.exportPrice = Float.parseFloat(sc.nextLine());
-
-        this.interest = this.exportPrice - this.importPrice;
-
-        System.out.println("Nhập trạng thái");
-        this.bookStatus = Boolean.parseBoolean(sc.nextLine());
-    }
-
-    @Override
-    public void displayData() {
-        System.out.printf("Mã sách: %d - Tên sách: %s - Tiêu đề: %s - Số trang sách: %d\n", this.bookId, this.bookName, this.title, this.numberOfPages);
-        System.out.printf("Giá nhập: %f - Giá bán: %f - Lợi nhuận: %f - Trạng thái: %s\n", this.importPrice, this.exportPrice, this.interest, this.bookStatus ? "còn hàng" : "Hết hàng");
-    }
-
-
-
-
     public int getBookId() {
         return bookId;
     }
@@ -128,5 +93,36 @@ public class Book implements IBook{
 
     public void setBookStatus(boolean bookStatus) {
         this.bookStatus = bookStatus;
+    }
+    @Override
+    public void inputData(Scanner sc) {
+        System.out.println("Nhập vào mã sách");
+        this.bookId = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Nhập tên sách");
+        this.bookName = sc.nextLine();
+
+        System.out.println("Nhập tiêu đề");
+        this.title = sc.nextLine();
+
+        System.out.println("Nhập số trang sách");
+        this.numberOfPages = Integer.parseInt(sc.nextLine());
+
+        System.out.println("Giá nhâp");
+        this.importPrice = Float.parseFloat(sc.nextLine());
+
+        System.out.println("Giá bán");
+        this.exportPrice = Float.parseFloat(sc.nextLine());
+
+        this.interest = this.exportPrice - this.importPrice;
+
+        System.out.println("Nhập trạng thái");
+        this.bookStatus = Boolean.parseBoolean(sc.nextLine());
+    }
+
+    @Override
+    public void displayData() {
+        System.out.printf("Mã sách: %d - Tên sách: %s - Tiêu đề: %s - Số trang sách: %d\n", this.bookId, this.bookName, this.title, this.numberOfPages);
+        System.out.printf("Giá nhập: %f - Giá bán: %f - Lợi nhuận: %f - Trạng thái: %s\n", this.importPrice, this.exportPrice, this.interest, this.bookStatus ? "Còn hàng" : "Hết hàng");
     }
 }
