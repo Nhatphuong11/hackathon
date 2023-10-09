@@ -29,7 +29,7 @@ public class Main {
                      show();
                     break;
                 case 3:
-                    sortDownInterest();
+                    sortDown();
                     break;
                 case 4:
                     delete();
@@ -49,15 +49,13 @@ public class Main {
     }
     public static void add(){
         System.out.print("Nhập số lượng sách cần thêm mới: ");
-        int numBooksToAdd = Integer.parseInt(sc.nextLine());
-
-        for (int i = 0; i < numBooksToAdd; i++) {
+        int BooksToAdd = Integer.parseInt(sc.nextLine());
+        for (int i = 0; i < BooksToAdd; i++) {
             Book book = new Book();
             book.inputData(sc);
-            bookList.add(book); // Thêm sách vào danh sách bookList
+            bookList.add(book);
         }
-
-        System.out.println(numBooksToAdd + " sách đã được thêm vào danh sách.");
+        System.out.println(BooksToAdd + " sách đã được thêm vào danh sách.");
     }
     public static void show(){
         for (Book book : bookList){
@@ -67,22 +65,22 @@ public class Main {
     public static void delete(){
         System.out.println("Nhập mã sách cần xoá");
         int deleteId = Integer.parseInt(sc.nextLine());
-        boolean check = false;
+        boolean found = false;
         Book deleteBook = new Book();
-        for (Book element : bookList) {
-            if(element.getBookId() == deleteId){
-                deleteBook = element;
-                check = true;
+        for (Book unbook : bookList) {
+            if(unbook.getBookId() == deleteId){
+                deleteBook = unbook;
+                found = true;
                 break;
             }
         }
-        if(check){
+        if(found){
             bookList.remove(deleteBook);
         }else {
             System.out.println("Mã sách cần xoá không tìm thấy");
         }
     }
-    public static void sortDownInterest() {
+    public static void sortDown() {
         Collections.sort(bookList,(s1, s2)->Double.compare(s2.getInterest(), s1.getInterest()));
         for (Book element : bookList) {
             element.displayData();
@@ -102,16 +100,25 @@ public class Main {
             System.out.println("Không tìm thấy sách với tên " + name);
         }
     }
-    public static  Void tradeStatus(){
+    public static void tradeStatus(){
         System.out.print("Nhập mã sách cần thay đổi trạng thái: ");
         int changeStatusBookId = Integer.parseInt(sc.nextLine());
+        boolean found = false;
+        Book tradeBook = new Book();
         for (Book book : bookList) {
             if (book.getBookId() == changeStatusBookId) {
-                book.setBookStatus(!book.isBookStatus());
+                tradeBook = book;
                 System.out.println("Trạng thái của sách đã được thay đổi.");
+                found = true;
                 break;
             }
         }
-        return null;
+        if(found){
+            tradeBook.setBookStatus(!tradeBook.isBookStatus());
+            tradeBook.displayData();
+        }else {
+            System.out.println("Mã sách cần xoá không tìm thấy");
+        }
+
     }
 }
